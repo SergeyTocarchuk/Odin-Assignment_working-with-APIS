@@ -1,0 +1,4 @@
+- use API for changing gifs;
+- add a button for changing GIF without reloading the page;
+- add input for taking from user theme of GIF;
+- add a listener (keypress) to input for searching a theme clicking Enter key. 
