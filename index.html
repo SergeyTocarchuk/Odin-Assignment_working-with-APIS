@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <div class="input-section">
+      <input id="search-input" type="text">
+      <button id="search-btn">Search</button>
+    </div>
+    <div class="content">
+      <h2>Find your favourite GIF</h2>
+      <img src="./gif_walpapper.jpeg">
+      <button id="btn">change GIF</button>
+    </div>
+  </div>
+  <script>
+    const img = document.querySelector('img');
+    const changeGifBtn = document.getElementById('btn');
+    changeGifBtn.addEventListener('click', showGif);
+
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('keypress', handleSearchInput);
+
+    const searchBtn = document.getElementById('search-btn');
+    searchBtn.addEventListener('click', showGif);
+    
+    function handleSearchInput(e) {
+      if (e.key === 'Enter') {
+        showGif();
+      }
+    }
+
+    function showGif() {
+      let searchInfo = searchInput.value;
+      fetch(`https://api.giphy.com/v1/gifs/translate?api_key=cyZtn884Dkhvc7H0UKPfnqZie8isHRaN&s=${searchInfo}`, {mode: 'cors'})
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(response) {
+        img.src = response.data.images.original.url;
+      })
+      .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+      })
+      // clearInput();
+    };
+
+    // function clearInput() {
+    //   searchInput.value = "";
+    // }
+
+  </script>
+</body>
+</html>
